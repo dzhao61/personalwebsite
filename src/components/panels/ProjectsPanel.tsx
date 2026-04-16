@@ -65,7 +65,7 @@ export default function ProjectsPanel() {
             <div className="flex flex-col gap-1 items-start">
               <StatusBadge status={p.status} />
               <div className="flex gap-2 mt-1">
-                {p.github && <ExternalLink href={p.github} label="GH" />}
+                {p.github && <ExternalLink href={p.github} label="Github" />}
                 {p.demo   && <ExternalLink href={p.demo}   label="DEMO" />}
               </div>
             </div>
@@ -82,7 +82,7 @@ function ExternalLink({ href, label }: { href: string; label: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ color: "#4AF6C3", fontSize: "11px", textDecoration: "none", letterSpacing: "0.04em" }}
+      style={{ color: "#4AF6C3", fontSize: "11px", textDecoration: "underline", letterSpacing: "0.04em" }}
       onMouseEnter={(e) => (e.currentTarget.style.color = "#F39F41")}
       onMouseLeave={(e) => (e.currentTarget.style.color = "#4AF6C3")}
     >

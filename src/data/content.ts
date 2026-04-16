@@ -9,7 +9,7 @@ export const bio = {
   email: "dzhao61@gmail.com",
   phone: "+61 416 325 821",
   github: "https://github.com/dzhao61",
-  linkedin: "https://linkedin.com/in/daniel-zhao",
+  linkedin: "https://www.linkedin.com/in/daniel-zhao-8b6b44199/",
   resume: "/resume.pdf",
   summary:
     "Master of Computer Science student at the University of Sydney, specialising in Algorithms and Theory, " +
