@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import StatusBar from "@/components/layout/StatusBar";
 import TopNav, { type PanelId } from "@/components/layout/TopNav";
 import TickerTape from "@/components/layout/TickerTape";
+import BootScreen from "@/components/layout/BootScreen";
 import BioPanel from "@/components/panels/BioPanel";
 import ExperiencePanel from "@/components/panels/ExperiencePanel";
 import ProjectsPanel from "@/components/panels/ProjectsPanel";
@@ -20,27 +21,40 @@ const PANELS: Record<PanelId, React.ComponentType> = {
 
 export default function Home() {
   const [activePanel, setActivePanel] = useState<PanelId>("bio");
+  // Start as true (show boot) — flip to false if already seen this session
+  const [showBoot, setShowBoot] = useState(true);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("booted")) setShowBoot(false);
+  }, []);
+
+  const handleBootDone = useCallback(() => {
+    sessionStorage.setItem("booted", "1");
+    setShowBoot(false);
+  }, []);
+
   const ActivePanel = PANELS[activePanel];
 
   return (
-    <div
-      className="flex flex-col h-full"
-      style={{
-        backgroundColor: "#000000",
-        fontFamily: "var(--font-ibm-plex-mono), 'Courier New', monospace",
-      }}
-    >
-      {/* Top status bars */}
-      <StatusBar activePanel={activePanel} />
-      <TopNav active={activePanel} onChange={setActivePanel} />
+    <>
+      {showBoot && <BootScreen onDone={handleBootDone} />}
 
-      {/* Main content */}
-      <main className="flex-1 overflow-auto" style={{ minHeight: 0 }}>
-        <ActivePanel />
-      </main>
+      <div
+        className="flex flex-col h-full"
+        style={{
+          backgroundColor: "#000000",
+          fontFamily: "var(--font-ibm-plex-mono), 'Courier New', monospace",
+        }}
+      >
+        <StatusBar activePanel={activePanel} />
+        <TopNav active={activePanel} onChange={setActivePanel} />
 
-      {/* Bottom ticker tape */}
-      <TickerTape />
-    </div>
+        <main className="flex-1 overflow-auto" style={{ minHeight: 0 }}>
+          <ActivePanel />
+        </main>
+
+        <TickerTape />
+      </div>
+    </>
   );
 }
