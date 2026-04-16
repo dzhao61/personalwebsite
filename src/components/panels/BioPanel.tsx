@@ -60,7 +60,7 @@ export default function BioPanel() {
                 { label: "Email",    value: bio.email },
                 { label: "Phone",    value: bio.phone ?? "" },
                 { label: "GitHub",   value: "github.com/dzhao61" },
-                { label: "LinkedIn", value: "linkedin.com/in/daniel-zhao" },
+                { label: "LinkedIn", value: "linkedin.com/in/daniel-zhao-8b6b44199/" },
                 { label: "Location", value: bio.location },
               ].map(({ label, value }) => (
                 <tr key={label} style={{ borderBottom: "1px solid #111111" }}>
