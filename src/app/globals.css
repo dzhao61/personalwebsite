@@ -1,26 +1,136 @@
 @import "tailwindcss";
 
+/* ─── Bloomberg Terminal Design Tokens ─────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bb-black:       #000000;
+  --bb-orange:      #F39F41;
+  --bb-orange-dim:  #A86C1E;
+  --bb-grey:        #AAAAAA;
+  --bb-green:       #4AF6C3;
+  --bb-red:         #FF433D;
+  --bb-border:      #2A2A2A;
+  --bb-panel:       #080808;
+  --bb-highlight:   #1A1200;
+  --bb-blue:        #1A3A6B;
+  --bb-blue-bright: #2A5ABB;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bb-black);
+  --color-foreground: var(--bb-orange);
+  --font-mono: var(--font-ibm-plex-mono), 'Courier New', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base Reset ────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bb-black);
+  color: var(--bb-orange);
+  font-family: var(--font-ibm-plex-mono), 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ─── CRT Scanline Overlay ──────────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.07) 2px,
+    rgba(0, 0, 0, 0.07) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Text Glow ─────────────────────────────────────────────────────────── */
+.glow {
+  text-shadow: 0 0 8px rgba(243, 159, 65, 0.6);
+}
+
+.glow-green {
+  text-shadow: 0 0 8px rgba(74, 246, 195, 0.6);
+}
+
+.glow-red {
+  text-shadow: 0 0 8px rgba(255, 67, 61, 0.6);
+}
+
+/* ─── Blinking Cursor ───────────────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* ─── Ticker Tape ───────────────────────────────────────────────────────── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 60s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Panel Borders ─────────────────────────────────────────────────────── */
+.panel {
+  border: 1px solid var(--bb-border);
+  background-color: var(--bb-panel);
+}
+
+.panel-header {
+  background-color: var(--bb-orange);
+  color: var(--bb-black);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bb-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bb-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bb-orange-dim);
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--bb-orange);
+  color: var(--bb-black);
 }
