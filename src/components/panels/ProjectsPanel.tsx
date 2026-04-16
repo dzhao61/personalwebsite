@@ -82,7 +82,7 @@ function ExternalLink({ href, label }: { href: string; label: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ color: "#4AF6C3", fontSize: "9px", textDecoration: "none", letterSpacing: "0.04em" }}
+      style={{ color: "#4AF6C3", fontSize: "11px", textDecoration: "none", letterSpacing: "0.04em" }}
       onMouseEnter={(e) => (e.currentTarget.style.color = "#F39F41")}
       onMouseLeave={(e) => (e.currentTarget.style.color = "#4AF6C3")}
     >

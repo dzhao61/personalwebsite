@@ -134,37 +134,60 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: "LoL Multi-Odds Repricing",
+    name: "League ML Prediction Model",
     description:
-      "Machine learning system for repricing multi-leg League of Legends betting odds using ensemble models and real-time data feeds.",
-    stack: ["Python", "scikit-learn", "FastAPI", "PostgreSQL"],
-    status: "LIVE",
-    github: "https://github.com/dzhao61/lol-odds-repricing",
-  },
-  {
-    name: "ClaudeMaxxing",
-    description:
-      "Tooling and prompts for maximising productivity with Claude AI — workflow automation and prompt engineering utilities.",
-    stack: ["TypeScript", "Next.js", "Anthropic API"],
+      "Pre-draft market-making system for League of Legends esports on Polymarket; ensemble of 5 models (XGBoost, Ridge, Lasso, ElasticNet, Logistic) trained on 13 years of Oracle's Elixir pro match data with 100+ rolling features including Elo, form, head-to-head, and draft; outputs symmetric maker quotes with Kelly criterion sizing posted to Polymarket's order book via a Streamlit terminal interface.",
+    stack: ["Python", "XGBoost", "scikit-learn", "Streamlit", "Polymarket API"],
     status: "WIP",
-    github: "https://github.com/dzhao61/claudemaxxing",
+    github: "https://github.com/dzhao61/League_ML_Prediction_Model",
   },
   {
-    name: "FastAPI Tutorial",
+    name: "Multi-Odds Repricing Arbitrage",
     description:
-      "Comprehensive FastAPI tutorial series covering REST APIs, async operations, dependency injection, and production deployment.",
-    stack: ["Python", "FastAPI", "Pydantic", "Docker"],
+      "Automated arbitrage system exploiting Polymarket's AMM repricing lag in the 30-second to 5-minute window following NBA playoff team eliminations; employs Bayesian fair-price redistribution across correlated legs, half-Kelly sizing with context-scaled multipliers (0.25×–1.20×), Fill-or-Kill limit orders, and a 25% bankroll cap per event with a 4-cent minimum edge threshold. Validated across 43 unit tests.",
+    stack: ["Python", "asyncio", "Pydantic", "scipy", "aiosqlite", "Polymarket API"],
+    status: "WIP",
+    github: "https://github.com/dzhao61/Multi-odds-Repricing-Arbitrage",
+  },
+  {
+    name: "ASX Banking Sector Analysis",
+    description:
+      "Information-theoretic analysis of share price dependencies among Australia's Big 5 banks (CBA, NAB, WBC, ANZ, MQG) using Mutual Information and Conditional MI with KSG estimators; isolated genuine sector linkage from market-driven co-movement, identifying WBC–NAB as the most structurally correlated pair and MQG's co-movement as ~77% market-driven. MI spikes captured visible regime shifts during COVID-19 and the 2022 RBA rate hike cycle.",
+    stack: ["Python", "numpy", "pandas", "yfinance", "JIDT", "Jupyter"],
     status: "LIVE",
-    github: "https://github.com/dzhao61/fastapi-tutorial",
+    github: "https://github.com/dzhao61/BankingSectorAnalysis",
+  },
+  {
+    name: "Aus Workplace Gender Equity ML",
+    description:
+      "Applied supervised ML to predict female management representation quintiles across 6,673 Australian organisations using the WGEA 2024 public dataset; engineered 32 features and benchmarked XGBoost, SVM, and decision tree classifiers — XGBoost achieved F1 0.677 and AUC 0.908 across 5-class classification. Key predictive drivers: full-time female proportion, executive female representation, and flexible work policy adoption.",
+    stack: ["R", "XGBoost", "caret", "SVM", "ggplot2", "FactoMineR"],
+    status: "LIVE",
+    github: "https://github.com/dzhao61/ML_Study_AusWorkplaceGenderEquity",
+  },
+  {
+    name: "OpenASX",
+    description:
+      "Static web application tracking ASX 200 index constituents and sector allocations over time; processes timestamped CSV snapshots via a Python build script into static JSON files for zero-runtime-dependency deployment on GitHub Pages. Covers 200 companies across 11 GICS sectors with support for BOM-encoded Excel exports.",
+    stack: ["Python", "HTML", "CSS", "JavaScript", "GitHub Pages"],
+    status: "LIVE",
+    github: "https://github.com/dzhao61/OpenASX",
+  },
+  {
+    name: "Claude Gesture Control",
+    description:
+      "macOS menu-bar utility that confirms Claude Code CLI prompts hands-free via webcam gesture detection; uses MediaPipe hand landmark tracking to identify rightward flick gestures with three configurable sensitivity presets (0.20 / 0.35 / 0.55) and ±0.05 fine-tuning, injecting keystrokes via pynput. Eliminates context-switching interruptions during autonomous coding sessions.",
+    stack: ["Python", "MediaPipe", "OpenCV", "pynput", "rumps"],
+    status: "LIVE",
+    github: "https://github.com/dzhao61/ClaudeGestureControl",
   },
   {
     name: "Portfolio Terminal",
     description:
-      "This Bloomberg Terminal-inspired portfolio site. Built with Next.js and Tailwind CSS, deployed to GitHub Pages.",
-    stack: ["TypeScript", "Next.js", "Tailwind CSS"],
+      "Bloomberg Terminal-inspired personal portfolio site with live clock, keyboard navigation, CRT scanline overlay, and scrolling ticker tape; built with Next.js and Tailwind CSS, deployed to GitHub Pages.",
+    stack: ["TypeScript", "Next.js", "Tailwind CSS", "GitHub Pages"],
     status: "LIVE",
     github: "https://github.com/dzhao61/dzhao61.github.io",
-    demo: "https://dzhao61.github.io",
   },
 ];
 
